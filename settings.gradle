@@ -1,0 +1,3 @@
+include ':swipereveal'
+include ':app'
+rootProject.name = "ComposeApplication"
