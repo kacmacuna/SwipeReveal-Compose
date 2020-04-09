@@ -62,7 +62,7 @@ fun SwipeReveal(
             position - old
         }.preferredHeight(layoutHeight).fillMaxHeight()
     ) {
-        SetActionButtons(swipeActionButton) {
+        SetActionButtons(layoutHeight, swipeActionButton) {
             minPx = -it.size.width.toPx().value
         }
         val xOffset = with(DensityAmbient.current) { position.toDp() }
@@ -75,14 +75,14 @@ fun SwipeReveal(
 
 @Composable
 private fun SetActionButtons(
+    layoutHeight: Dp,
     swipeActionButton: Collection<SwipeActionButton>,
     onPositioned: (LayoutCoordinates) -> Unit
 ) {
     Row(
         arrangement = Arrangement.End,
         modifier = Modifier
-            .preferredHeightIn()
-            .fillMaxHeight()
+            .preferredHeight(layoutHeight)
             .drawBackground(color = Color.Cyan)
             .onPositioned(onPositioned)
     ) {

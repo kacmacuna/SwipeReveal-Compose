@@ -26,12 +26,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MaterialTheme {
-                Column(
-                    modifier = Modifier.gravity(ColumnAlign.Center),
-                    arrangement = Arrangement.Top
-                ) {
-                    TestPointerInput()
-                }
+                TestPointerInput()
             }
         }
     }
