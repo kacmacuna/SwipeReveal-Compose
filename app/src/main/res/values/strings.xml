@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ComposeApplication</string>
+    <string name="common_delete">Delete</string>
 </resources>

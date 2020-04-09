@@ -1,6 +1,5 @@
 package com.example.swipereveal.sample
 
-import android.widget.Toast
 import androidx.compose.Composable
 import androidx.ui.core.ContextAmbient
 import androidx.ui.core.Modifier
@@ -14,19 +13,14 @@ import androidx.ui.layout.preferredHeight
 import androidx.ui.text.TextStyle
 import androidx.ui.unit.dp
 import androidx.ui.unit.sp
-import com.example.swipereveal.R
-import com.example.swipereveal.SwipeActionButton
 import com.example.swipereveal.SwipeReveal
+import com.example.swipereveal.model.SwipeActionButton
+import com.example.swipereveal.model.swipeActionButton
 
 @Composable
-fun DraggableSample() {
+fun DraggableSample(swipeActionButtons: List<SwipeActionButton> = getMockButtons()) {
     val squareHeight = 100.dp
-    val current = ContextAmbient.current
-    SwipeReveal(squareHeight, MOCK.map {
-        it.copy(onClick = {
-            Toast.makeText(current, it.actionName, Toast.LENGTH_SHORT).show()
-        })
-    }) {
+    SwipeReveal(squareHeight, swipeActionButtons) {
         Box(
             gravity = ContentGravity.Center,
             modifier = Modifier
@@ -42,14 +36,16 @@ fun DraggableSample() {
     }
 }
 
-internal val MOCK =
+
+@Composable
+fun getMockButtons() =
     listOf(
-        SwipeActionButton(
-            "Delete",
-            Color.Magenta
-        ) {},
-        SwipeActionButton(
-            "Edit",
-            Color.Blue
-        ) {}
+        swipeActionButton {
+            name = "Delete"
+            color = Color.Magenta
+        },
+        swipeActionButton {
+            name = "Edit"
+            color = Color.Blue
+        }
     )
