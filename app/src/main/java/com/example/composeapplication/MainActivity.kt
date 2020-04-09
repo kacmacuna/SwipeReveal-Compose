@@ -18,20 +18,7 @@ import androidx.ui.tooling.preview.Preview
 import androidx.ui.unit.*
 import com.example.swipereveal.SwipeActionButton
 import com.example.swipereveal.SwipeReveal
-
-val MOCK =
-    listOf(
-        SwipeActionButton(
-            "Delete",
-            Color.Magenta,
-            R.drawable.ic_trash
-        ) {},
-        SwipeActionButton(
-            "Edit",
-            Color.Blue,
-            R.drawable.ic_edit
-        ) {}
-    )
+import com.example.swipereveal.sample.DraggableSample
 
 
 class MainActivity : AppCompatActivity() {
@@ -54,30 +41,6 @@ class MainActivity : AppCompatActivity() {
 @Composable
 fun TestPointerInput() {
     DraggableSample()
-}
-
-@Composable
-fun DraggableSample() {
-    val squareHeight = 100.dp
-    val current = ContextAmbient.current
-    SwipeReveal(squareHeight, MOCK.map {
-        it.copy(onClick = {
-            Toast.makeText(current, it.actionName, Toast.LENGTH_SHORT).show()
-        })
-    }) {
-        Box(
-            gravity = ContentGravity.Center,
-            modifier = Modifier
-                .preferredHeight(squareHeight)
-                .fillMaxWidth()
-                .drawBackground(Color.White)
-        ) {
-            Text(
-                text = "Cool service but not as cool as me",
-                style = TextStyle(color = Color.Black, fontSize = 18.sp)
-            )
-        }
-    }
 }
 
 

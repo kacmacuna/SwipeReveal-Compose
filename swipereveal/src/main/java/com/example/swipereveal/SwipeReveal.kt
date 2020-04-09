@@ -27,6 +27,7 @@ import androidx.ui.unit.Dp
 import androidx.ui.unit.dp
 import androidx.ui.unit.times
 import androidx.ui.unit.toPx
+import com.example.swipereveal.sample.DraggableSample
 
 
 @Composable
@@ -102,14 +103,15 @@ private fun SetActionButtons(
                         .fillMaxHeight()
                         .padding(top = 16.dp, bottom = 16.dp)
                 ) {
-                    loadVectorResource(id = it.drawableRes).resource.resource?.let { va ->
-                        Image(
-                            asset = va,
-                            modifier = Modifier
-                                .preferredSize(24.dp, 24.dp).gravity(ColumnAlign.Center),
-                            scaleFit = ScaleFit.FillMinDimension
-                        )
-                    }
+                    if (it.drawableRes != null)
+                        loadVectorResource(id = it.drawableRes).resource.resource?.let { va ->
+                            Image(
+                                asset = va,
+                                modifier = Modifier
+                                    .preferredSize(24.dp, 24.dp).gravity(ColumnAlign.Center),
+                                scaleFit = ScaleFit.FillMinDimension
+                            )
+                        }
                     Text(
                         text = it.actionName,
                         maxLines = 1,
@@ -126,9 +128,17 @@ private fun SetActionButtons(
     }
 }
 
+@Preview
+@Composable
+fun DefaultPreview() {
+    MaterialTheme {
+        DraggableSample()
+    }
+}
+
 data class SwipeActionButton(
     val actionName: String,
     val backgroundColor: Color,
-    @DrawableRes val drawableRes: Int,
+    @DrawableRes val drawableRes: Int? = null,
     val onClick: () -> Unit
 )
