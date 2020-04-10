@@ -18,7 +18,7 @@ implementation 'com.github.kacmacuna:SwipeReveal-Compose:0.1.2'
 ```
 
 ### Quickstart
-Call SwipeReveal method in your @Composable annotated method. and pass height and action buttons you want to show when swiped like that.
+Call SwipeReveal in your @Composable annotated method. and pass height and action buttons you want to show when your view is swiped.
 ```
 @Composable
 fun FirstSwipable() {
