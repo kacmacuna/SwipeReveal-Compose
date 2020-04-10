@@ -3,11 +3,9 @@ package com.example.swipereveal
 import androidx.annotation.DrawableRes
 import androidx.compose.Composable
 import androidx.compose.MutableState
+import androidx.compose.remember
 import androidx.compose.state
-import androidx.ui.core.DensityAmbient
-import androidx.ui.core.LayoutCoordinates
-import androidx.ui.core.Modifier
-import androidx.ui.core.onPositioned
+import androidx.ui.core.*
 import androidx.ui.foundation.*
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Color
@@ -24,6 +22,7 @@ import androidx.ui.unit.Dp
 import androidx.ui.unit.dp
 import androidx.ui.unit.toPx
 import com.example.swipereveal.model.SwipeActionButton
+import com.example.swipereveal.model.SwipePosition
 import com.example.swipereveal.sample.DraggableSample
 
 
@@ -31,22 +30,25 @@ import com.example.swipereveal.sample.DraggableSample
 fun SwipeReveal(
     layoutHeight: Dp,
     swipeActionButton: Collection<SwipeActionButton>,
+    swipeGravity: SwipeGravity = SwipeGravity.End,
     children: @Composable() () -> Unit
 ) {
-    val position = state { 0f }
-    val min = 0.dp
-
-    val minLeft = state { 0F }
-    val maxRight = with(DensityAmbient.current) { min.toPx().value }
+    val swipePosition = remember { SwipePosition(0f, 0f, 0f) }
 
     Box(
-        gravity = ContentGravity.CenterEnd,
+        gravity = swipeGravity.toContentGravity(),
         modifier = Modifier
-            .swipable(position, minLeft.value, maxRight)
+            .swipable(swipePosition)
             .preferredHeight(layoutHeight)
             .fillMaxHeight()
     ) {
-        SwipableBody(layoutHeight, swipeActionButton, minLeft, position, children)
+        SwipableBody(
+            layoutHeight,
+            swipeGravity,
+            swipeActionButton,
+            swipePosition,
+            children
+        )
     }
 
 }
@@ -54,15 +56,19 @@ fun SwipeReveal(
 @Composable
 private fun SwipableBody(
     layoutHeight: Dp,
+    swipeGravity: SwipeGravity,
     swipeActionButton: Collection<SwipeActionButton>,
-    minLeft: MutableState<Float>,
-    position: MutableState<Float>,
+    swipePosition: SwipePosition,
     children: @Composable() () -> Unit
 ) {
     SetActionButtons(layoutHeight, swipeActionButton) {
-        minLeft.value = -it.size.width.toPx().value
+        if (swipeGravity == SwipeGravity.End) {
+            swipePosition.minLeft = -it.size.width.toPx().value
+        } else {
+            swipePosition.maxRight = it.size.width.toPx().value
+        }
     }
-    val xOffset = with(DensityAmbient.current) { position.value.toDp() }
+    val xOffset = with(DensityAmbient.current) { swipePosition.position.toDp() }
     Box(
         Modifier
             .offset(x = xOffset, y = 0.dp)
@@ -132,6 +138,17 @@ private fun SetActionButtons(
 fun DefaultPreview() {
     MaterialTheme {
         DraggableSample()
+    }
+}
+
+enum class SwipeGravity {
+    Start, End;
+
+    fun toContentGravity(): Alignment {
+        return if (this == Start)
+            ContentGravity.CenterStart
+        else
+            ContentGravity.CenterEnd
     }
 }
 

@@ -7,9 +7,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.*
 import androidx.ui.core.*
 import androidx.ui.foundation.Text
+import androidx.ui.graphics.Color
 import androidx.ui.material.*
 import androidx.ui.res.colorResource
 import androidx.ui.tooling.preview.Preview
+import com.example.swipereveal.model.SwipeActionButton
 import com.example.swipereveal.model.swipeActionButton
 import com.example.swipereveal.sample.DraggableSample
 

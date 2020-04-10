@@ -6,29 +6,28 @@ import androidx.compose.MutableState
 import androidx.ui.core.Modifier
 import androidx.ui.foundation.gestures.DragDirection
 import androidx.ui.foundation.gestures.draggable
+import com.example.swipereveal.model.SwipePosition
 
 @Composable
 internal fun Modifier.swipable(
-    position: MutableState<Float>,
-    minPx: Float,
-    maxPx: Float
+    swipePosition: SwipePosition
 ): Modifier {
-    val avg = (maxPx + minPx) / 2
+    val avg = (swipePosition.maxRight + swipePosition.minLeft) / 2
     return this + draggable(
         dragDirection = DragDirection.Horizontal,
         onDragStopped = {
-            ValueAnimator.ofFloat(position.value, if (position.value < avg) minPx else maxPx)
+            ValueAnimator.ofFloat(swipePosition.position, if (swipePosition.position < avg) swipePosition.minLeft else swipePosition.maxRight)
                 .apply {
                     addUpdateListener {
-                        position.value = it.animatedValue as Float
+                        swipePosition.position = it.animatedValue as Float
                     }
                     duration = 333
                     start()
                 }
         }
     ) { delta ->
-        val old = position.value
-        position.value = (position.value + delta).coerceIn(minPx, maxPx)
-        position.value - old
+        val old = swipePosition.position
+        swipePosition.position = (swipePosition.position + delta).coerceIn(swipePosition.minLeft, swipePosition.maxRight)
+        swipePosition.position - old
     }
 }
