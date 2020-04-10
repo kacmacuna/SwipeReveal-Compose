@@ -16,3 +16,43 @@ Step 2. Add the dependency to your app level build file
 ```
 implementation 'com.github.kacmacuna:SwipeReveal-Compose:0.1.2'
 ```
+
+### Quickstart
+Call SwipeReveal method in your @Composable annotated method. and pass height and action buttons you want to show when swiped like that.
+```
+@Composable
+fun FirstSwipable() {
+    Column {
+        val current = ContextAmbient.current
+        val swipeActionButtons = listOf(
+            swipeActionButton {
+                name = "Delete"
+                textColorRes = R.color.colorAccent
+                color = Color.Red
+                onClick = {
+                    Toast.makeText(current, name, Toast.LENGTH_SHORT).show()
+                }
+            }
+        )
+        val squareHeight = 100.dp
+        SwipeReveal(squareHeight, swipeActionButtons) {
+            Box(
+                gravity = ContentGravity.Center,
+                modifier = Modifier
+                    .preferredHeight(squareHeight)
+                    .fillMaxWidth()
+                    .drawBackground(Color.White)
+            ) {
+                Text(
+                    text = "Cool service but not as cool as me",
+                    style = TextStyle(color = Color.Black, fontSize = 18.sp)
+                )
+            }
+        }
+    }
+}
+```
+
+![Alt Text](https://media.giphy.com/media/lTMDeJDkOuSUpFbElq/giphy.gif)
+
+
