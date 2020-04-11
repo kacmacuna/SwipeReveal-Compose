@@ -58,3 +58,5 @@ fun FirstSwipable() {
 
 ![Alt Text](https://media.giphy.com/media/icJODo7rupIs1Cgl3z/giphy.gif)
 
+![Alt Text](https://media.giphy.com/media/Lmg1YFBZhiXCDOPZwN/giphy.gif)
+
