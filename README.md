@@ -14,7 +14,7 @@ maven { url 'https://jitpack.io' }
 ```
 Step 2. Add the dependency to your app level build file
 ```
-implementation 'com.github.kacmacuna:SwipeReveal-Compose:0.1.2'
+implementation 'com.github.kacmacuna:SwipeReveal-Compose:0.1.4'
 ```
 
 ### Quickstart
