@@ -1,12 +1,9 @@
 package com.example.swipereveal.model
 
-import android.content.Context
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.Composable
-import androidx.core.content.ContextCompat
-import androidx.ui.foundation.contentColor
 import androidx.ui.graphics.Color
 import androidx.ui.graphics.vector.VectorAsset
 import androidx.ui.res.colorResource
@@ -16,6 +13,9 @@ import androidx.ui.res.stringResource
 
 class SwipeActionButtonBuilder
 internal constructor() {
+
+    var gravity: SwipeGravity = SwipeGravity.End
+
     var name: String = ""
 
     @StringRes
@@ -45,7 +45,8 @@ internal constructor() {
             getBackgroundColor(),
             getVectorAsset(),
             getActionTextColor(),
-            onClick
+            onClick,
+            gravity
         )
     }
 

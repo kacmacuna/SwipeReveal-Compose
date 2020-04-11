@@ -15,6 +15,7 @@ import androidx.ui.unit.dp
 import androidx.ui.unit.sp
 import com.example.swipereveal.SwipeReveal
 import com.example.swipereveal.model.SwipeActionButton
+import com.example.swipereveal.model.SwipeGravity
 import com.example.swipereveal.model.swipeActionButton
 
 @Composable
@@ -47,5 +48,10 @@ fun getMockButtons() =
         swipeActionButton {
             name = "Edit"
             color = Color.Blue
+        },
+        swipeActionButton {
+            name = "Remind"
+            color = Color.Yellow
+            gravity = SwipeGravity.Start
         }
     )
