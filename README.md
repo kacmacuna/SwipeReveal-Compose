@@ -52,7 +52,9 @@ fun FirstSwipable() {
     }
 }
 ```
+#### Results
 
 ![Alt Text](https://media.giphy.com/media/lTMDeJDkOuSUpFbElq/giphy.gif)
+
 ![Alt Text](https://media.giphy.com/media/icJODo7rupIs1Cgl3z/giphy.gif)
 
