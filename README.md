@@ -52,8 +52,4 @@ fun FirstSwipable() {
     }
 }
 ```
-### Results
-
-
-![Alt Text](https://media.giphy.com/media/Lmg1YFBZhiXCDOPZwN/giphy.gif)
 
